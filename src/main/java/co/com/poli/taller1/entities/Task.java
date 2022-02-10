@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Getter
@@ -14,16 +18,19 @@ import java.util.Date;
 @Entity
 @Table(name = "tasks")
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
+    @NotEmpty(message = "El id no puede estar en blanco")
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty(message = "El name no puede estar en blanco")
     private String name;
 
     @Column(name = "summary")
+    @NotEmpty(message = "El summary no puede estar en blanco")
     private String summary;
     @Column(name = "acceptance_criteria")
     private String acceptanceCriteria;
@@ -31,10 +38,13 @@ public class Task {
     private String status;
 
     @Column(name = "priority")
+    @Size(min = 1, max = 5)
     private int priority;
 
 
     @Column(name = "hours")
+    @Size(min = 1, max = 8)
+    @Positive(message = "Las horas deben ser positivas")
     private Double hours;
     @Column(name = "start_date")
     @JsonFormat(pattern="dd-MM-yyyy")

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Getter
@@ -19,6 +20,7 @@ public class Backlog {
     @Column(name = "id")
     private Long id;
     @Column(name = "project_identifier")
+    @NotEmpty(message = "El projectIdentifier no puede estar en blanco")
     private String projectIdentifier;
     @JsonBackReference
     @OneToOne(fetch = FetchType.EAGER)

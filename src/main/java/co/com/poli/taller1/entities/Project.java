@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,10 +23,14 @@ public class Project {
     @Column(name = "id")
     private Long id;
     @Column(name = "project_name", unique = true)
+    @NotEmpty(message = "El projectName no puede estar en blanco")
     private String projectName;
     @Column(name = "project_identifier", unique = true, updatable = false)
+    @NotEmpty(message = "El projectIdentifier no puede estar en blanco")
+    @Size(min = 5, max = 7)
     private String projectIdentifier;
     @Column(name = "description")
+    @NotEmpty(message = "La description no puede estar en blanco")
     private String description;
     @Column(name = "start_date")
     @JsonFormat(pattern="dd-MM-yyyy")
